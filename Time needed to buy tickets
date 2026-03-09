@@ -1,0 +1,29 @@
+#include <stdio.h>
+int main() {
+    int n;
+    if (scanf("%d", &n) != 1) return 0;
+    int tickets[100];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &tickets[i]);
+    }
+    int k;
+    scanf("%d", &k);
+    int time = 0;
+    for (int i = 0; i < n; i++) {
+        if (i <= k) {
+            if (tickets[i] < tickets[k]) {
+                time += tickets[i];
+            } else {
+                time += tickets[k];
+            }
+        } else {
+            if (tickets[i] < tickets[k] - 1) {
+                time += tickets[i];
+            } else {
+                time += (tickets[k] - 1);
+            }
+        }
+    }
+    printf("%d", time);
+    return 0;
+}
