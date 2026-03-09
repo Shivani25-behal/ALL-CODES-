@@ -1,0 +1,16 @@
+#include<stdio.h>
+int main(){
+    int n,oct=0;
+    printf("Enter the number = ");
+    scanf("%d",&n);
+    int temp=n;
+    int place=1;
+    while(temp!=0){
+        int rem = temp%8;
+        oct = oct+rem*place;
+        temp=temp/8;
+        place=place*10;
+    }
+    printf("Octal of %d is %d",n,oct);
+    return 0;
+}
