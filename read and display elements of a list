@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main() {
+    int n;      
+    int list[100]; 
+    int i;       
+    scanf("%d", &n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &list[i]);
+    }
+    for (i = 0; i < n; i++) {
+        printf("%d", list[i]);
+        if (i < n - 1) {
+            printf(" ");
+        }
+    }
+    printf("\n");
+
+    return 0;
+}
