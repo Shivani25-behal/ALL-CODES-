@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 100
+
+int arr[MAX];
+int front[10], rear[10];
+int n,k,size;
+
+void enqueue(int q,int x){
+    int start=(q-1)*size;
+    int end=start+size-1;
+    if(rear[q]==end){
+        printf("Queue Overflow\n");
+        return;
+    }
+    if(front[q]==-1){
+        front[q]=start;
+    }
+    rear[q]++;
+    arr[rear[q]]=x;
+}
+
+void dequeue(int q){
+    if(front[q]==-1 || front[q]>rear[q]){
+        printf("Queue Underflow\n");
+        return;
+    }
+    printf("%d\n",arr[front[q]]);
+    front[q]++;
+    if(front[q]>rear[q]){
+        front[q]=rear[q]=-1;
+    }
+}
+
+void peek(int q){
+    if(front[q]==-1){
+        printf("Queue Underflow\n");
+        return;
+    }
+    printf("%d\n",arr[front[q]]);
+}
+
+void display(int q){
+    if(front[q]==-1){
+        printf("Queue Underflow\n");
+        return;
+    }
+    for(int i=front[q];i<=rear[q];i++){
+        printf("%d ",arr[i]);
+    }
+    printf("\n");
+}
+
+int main(){
+    int q;
+    scanf("%d %d",&n,&k);
+    size=n/k;
+    for(int i=1;i<=k;i++){
+        front[i]=-1;
+        rear[i]=(i-1)*size-1;
+    }
+    scanf("%d",&q);
+    char op[20];
+    int r,x;
+    for(int i=0;i<q;i++){
+        scanf("%s",op);
+        if(strcmp(op,"ENQUEUE")==0){
+            scanf("%d %d",&r,&x);
+            enqueue(r,x);
+        }
+        else if(strcmp(op,"DEQUEUE")==0){
+            scanf("%d",&r);
+            dequeue(r);
+        }
+        else if(strcmp(op,"PEEK")==0){
+            scanf("%d",&r);
+            peek(r);
+        }
+        else if(strcmp(op,"DISPLAY")==0){
+            scanf("%d",&r);
+            display(r);
+        }
+    }
+    return 0;
+}
