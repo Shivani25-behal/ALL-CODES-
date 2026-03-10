@@ -45,6 +45,26 @@ if(i == pos-1)
 break;
 temp = temp->next;
 }
+if(temp == NULL)
+printf("Invalid position!!!\n");
+else{
+ struct Node* newNode=createNode(data);
+    newNode->next= temp->next;
+    temp->next = newNode;
+    printf("Node insterted at position %d successfully!!!\n",pos);
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
 
 
 int main(){
