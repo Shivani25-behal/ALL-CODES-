@@ -19,43 +19,62 @@ void insertInBeg(int data){
     head=newNode;
     printf("Node insterted in beginning!!!\n");
 }
-void insertAtEnd(int data){
-struct Node*newNode =createNode(data);
-if(head == NULL)
-else{
-struct Node* temp = head;
-while(temp->next != Null){
-temp = temp->next;
+void insertNodeAtEnd(int data){
+    struct Node* newNode = createNode(data);
+    if(head == NULL)
+    head = newNode;
+    else{
+        struct Node* temp = head;
+        while(temp->next != Null){
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+    printf("Node Inserted In end\n");
 }
-temp->next = newNode;
+void insertAtAnyPos(int data, int pos){
+    if(head == Null)
+    printf("List is empty!!!\n");
+    else if(pos == 0)
+    insertInBag(data);
+    else{
+        struct Node* temp = head;
+        int i=0;
+        while(temp!=NULL){
+            if(i == pos-1)
+            break;
+            temp = temp->next;
+        }
+        if(temp == NULL)
+        printf("Invalid Position!!!\n");
+        else{
+            struct Node* newNode = createNodde(data);
+            newNode->next = temp->next;
+            temp->next = newNode;
+            printf("Node inserted at position %d successfully!!\n",pos);
+        }
+    }
 }
-printf("Node Inserted In End\n");
+void deleteFromBeg(){
+    if(head==NULL)
+    printf("List is Empty!!!\n");
+    else{
+        head=head->next;
+        printf("Node deleted from begining!!!\n");
+    }
 }
-
-void insertAtAnyPosition(int data,int pos){
-if(head == NULL)
-printf("List is empty!!!\n):
-else if(pos == 0)
-insertInBeg(data);
-else{
-struct Node* temp = head;
-int i=0;
-while(temp != Null){
-if(i == pos-1)
-break;
-temp = temp->next;
+void deleteFromEnd(){
+      if(head==NULL)
+    printf("List is Empty!!!\n");
+      else{
+        struct Node* temp = head;
+        while(temp->next->next!=NULL){
+            temp = temp->next;
+        }
+        head=head->next;
+        printf("Node deleted from begining!!!\n");
+    }
 }
-if(temp == NULL)
-printf("Invalid position!!!\n");
-else{
- struct Node* newNode=createNode(data);
-    newNode->next= temp->next;
-    temp->next = newNode;
-    printf("Node insterted at position %d successfully!!!\n",pos);
-}
-}
-}
-
 
 
 
