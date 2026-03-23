@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+   struct Node* prev;
+   int data;
+   struct Node*next;
+};
+//struct Node* head=NULL;
+struct Node* createNode(int data){
+struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+temp->data = data;
+temp->next = NULL;
+return temp;
+}
+//void insertNodeInBeg(int data){
+    //struct Node* newNode = createNode(data);
+    //if(head == Null){
+    //head = newNode;
+    //}
+    //else{
+      //  newNode->next = head;
+      //  head = newNode;
+
+    }
+}
+int main(){
+while(1){
+    printf("\n***** doubly Linked List *****\n")
+    printf("1.Insert In Beginning\n");
+    printf("2. Insert At End\n");
+    printf("3. Insert At Specified Position\n");
+    printf("4. Delete From Beginning\n");
+    printf("5. Delete From End\n");
+    printf("6. Delete From Specified Position\n");
+    printf("7. Display list\n");
+    printf("8. Search Element in list\n");
+    printf("9. Exit\n");
+    int choice, data, pos;
+    printf("Enter Choice:");
+    scanf("%d", &choice);
+}
+}
