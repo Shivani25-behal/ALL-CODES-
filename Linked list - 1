@@ -1,1 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* insertBeginning(struct Node* head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = head;
+    return newNode;
+}
+
+struct Node* deletePosition(struct Node* head, int pos) {
+    if (pos == 1) {
+        struct Node* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+    struct Node* temp = head;
+    for (int i = 1; i < pos - 1 && temp->next != NULL; i++)
+        temp = temp->next;
+    if (temp->next != NULL) {
+        struct Node* del = temp->next;
+        temp->next = del->next;
+        free(del);
+    }
+    return head;
+}
+
+struct Node* insertEnd(struct Node* head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    if (head == NULL)
+        return newNode;
+    struct Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+    temp->next = newNode;
+    return head;
+}
+
+struct Node* insertPosition(struct Node* head, int pos, int data) {
+    if (pos == 1)
+        return insertBeginning(head, data);
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    struct Node* temp = head;
+    for (int i = 1; i < pos - 1 && temp->next != NULL; i++)
+        temp = temp->next;
+    newNode->next = temp->next;
+    temp->next = newNode;
+    return head;
+}
+
+void display(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int n, x, pos, endData, insertPos, insertData;
+    struct Node* head = NULL;
+
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x);
+        head = insertEnd(head, x);
+    }
+
+    scanf("%d", &x);
+    head = insertBeginning(head, x);
+
+    scanf("%d", &pos);
+    head = deletePosition(head, pos);
+
+    scanf("%d", &endData);
+    head = insertEnd(head, endData);
+
+    scanf("%d %d", &insertPos, &insertData);
+    head = insertPosition(head, insertPos, insertData);
+
+    display(head);
+
+    return 0;
+}
