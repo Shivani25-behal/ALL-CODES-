@@ -18,9 +18,8 @@ int main(){
     int n,val;
     scanf("%d",&n);
    struct Node* tail = NULL;
-    for(int i=0;i<n;i++){
+    for(int i=0; i<n; i++){
         scanf("%d",&val);
-        struct Node* newNode = createNode(val);
         struct Node* newNode = createNode(val);
         if(head == NULL)
             head = newNode;
@@ -28,7 +27,22 @@ int main(){
             tail->next = newNode;
         tail = newNode;
     }
+    int odd = 0,even = 0;
+    struct Node* temp = head;
+    for(int i=0; i<n ; i+=2){
+        if(temp->data > temp->next->data){
+            even++;
+        else if(temp->data < temp->next->data){
+            odd++;
+        temp = temp->next->next;
+    }
+        }
+    if(even == odd)
+        printf("Tie");
+    else if(even > odd)
+        printf("Even");
+    else{
+        printf("Odd");
+    }
+      return 0;
 }
-      
-    return 0;
-
