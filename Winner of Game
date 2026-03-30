@@ -1,1 +1,30 @@
+struct Node{
+    int data;
+    struct Node* next;
+};
+struct Node* head=NULL;
+struct Node* createNode(int data){
+    struct Node* temp=(struct Node*)malloc(sizeof(struct Node));
+    temp->data=data;
+    temp->next=NULL;
+    return temp;
+}
+
+int main(){
+    int n,val;
+    scanf("%d",&n);
+   struct Node* tail = NULL:
+    for(int i=0;i<n;i++){
+        scanf("%d",&val);
+        struct Node* newNode = createNode(val);
+        struct Node* newNode = createNode(val);
+        if(head == NULL)
+            head = newNode;
+        else
+            tail->next = newNode;
+        tail = newNode;
+    }
+}
+      
+    return 0;
 
