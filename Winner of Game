@@ -30,12 +30,12 @@ int main(){
     int odd = 0,even = 0;
     struct Node* temp = head;
     for(int i=0; i<n ; i+=2){
-        if(temp->data > temp->next->data){
+        if(temp->data > temp->next->data)
             even++;
-        else if(temp->data < temp->next->data){
+        else if(temp->data < temp->next->data)
             odd++;
         temp = temp->next->next;
-    }
+    
         }
     if(even == odd)
         printf("Tie");
