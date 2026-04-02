@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* tail = NULL;
+
+void insertEnd(int x) {
+    struct Node* n = (struct Node*)malloc(sizeof(struct Node));
+    n->data = x;
+    if (!tail) {
+        tail = n;
+        tail->next = tail;
+    } else {
+        n->next = tail->next;
+        tail->next = n;
+        tail = n;
+    }
+}
+
+void insertBegin(int x) {
+    struct Node* n = (struct Node*)malloc(sizeof(struct Node));
+    n->data = x;
+    if (!tail) {
+        tail = n;
+        tail->next = tail;
+    } else {
+        n->next = tail->next;
+        tail->next = n;
+    }
+}
+
+void deleteBegin() {
+    if (!tail) return;
+    if (tail->next == tail) {
+        free(tail);
+        tail = NULL;
+    } else {
+        struct Node* head = tail->next;
+        tail->next = head->next;
+        free(head);
+    }
+}
+
+void deleteEnd() {
+    if (!tail) return;
+    if (tail->next == tail) {
+        free(tail);
+        tail = NULL;
+        return;
+    }
+    struct Node* temp = tail->next;
+    while (temp->next != tail)
+        temp = temp->next;
+    temp->next = tail->next;
+    free(tail);
+    tail = temp;
+}
+
+void deleteValue(int x) {
+    if (!tail) return;
+    struct Node* curr = tail->next;
+    struct Node* prev = tail;
+    do {
+        if (curr->data == x) {
+            if (curr == tail && curr == tail->next) {
+                free(curr);
+                tail = NULL;
+                return;
+            }
+            prev->next = curr->next;
+            if (curr == tail) tail = prev;
+            free(curr);
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    } while (curr != tail->next);
+}
+
+int search(int x) {
+    if (!tail) return -1;
+    struct Node* temp = tail->next;
+    int pos = 1;
+    do {
+        if (temp->data == x) return pos;
+        temp = temp->next;
+        pos++;
+    } while (temp != tail->next);
+    return -1;
+}
+
+int countNodes() {
+    if (!tail) return 0;
+    int c = 1;
+    struct Node* temp = tail->next;
+    while (temp != tail) {
+        c++;
+        temp = temp->next;
+    }
+    return c;
+}
+
+void printList() {
+    if (!tail) {
+        printf("EMPTY\n");
+        return;
+    }
+    struct Node* temp = tail->next;
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != tail->next);
+    printf("\n");
+}
+
+int main() {
+    int Q;
+    scanf("%d", &Q);
+    while (Q--) {
+        int code;
+        scanf("%d", &code);
+        if (code == 1) {
+            int x; scanf("%d", &x);
+            insertEnd(x);
+        } else if (code == 2) {
+            int x; scanf("%d", &x);
+            insertBegin(x);
+        } else if (code == 3) {
+            int x, p;
+            scanf("%d %d", &x, &p);
+            if (p == 1) insertBegin(x);
+            else if (p == countNodes() + 1) insertEnd(x);
+            else {
+                struct Node* temp = tail->next;
+                for (int i = 1; i < p - 1; i++)
+                    temp = temp->next;
+                struct Node* n = (struct Node*)malloc(sizeof(struct Node));
+                n->data = x;
+                n->next = temp->next;
+                temp->next = n;
+            }
+        } else if (code == 4) {
+            int x; scanf("%d", &x);
+            deleteValue(x);
+        } else if (code == 5) {
+            deleteBegin();
+        } else if (code == 6) {
+            deleteEnd();
+        } else if (code == 7) {
+            int x; scanf("%d", &x);
+            printf("%d\n", search(x));
+        } else if (code == 8) {
+            printList();
+        } else if (code == 9) {
+            printf("%d\n", countNodes());
+        }
+    }
+    return 0;
+}
