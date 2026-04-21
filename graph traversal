@@ -1,0 +1,40 @@
+#include<stdio.h>
+#define MAX 10
+int n;// Number of vertices
+int adjMatrix[MAX][MAX];
+void insertEdge(int u, int v){
+    adjMatrix[u][v] = 1;
+    adjMatrix[v][u] = 1;//only foruni directional
+    printf("Edge Inserted !!!\n");
+}
+
+
+int main(){
+    printf("Enter number of vertexs: ");
+    scanf("%d",&n);
+    int choice,u,v;
+    while(1){
+        printf("1. Insert Edge In Graph\n");
+        printf("2. BFS Traversal\n");
+        printf("#. DFS Traversal\n");
+        printf("4. Exit\n");
+        printf("Enter Choice: ");
+        scanf("%d" , &choice);
+        switch(choice){
+            case 1:
+            printf("Enter Edge(U , V):");
+            scanf("%d%d", &u,&v);
+            insertEdge(u, v);
+            break;
+            case 2:
+            break;
+            case 3:
+            break;
+            case 4:
+            exit(0);
+            default:
+            printf("Invalid Choice !!!!\n");
+        }
+    }
+    return 0;
+}
