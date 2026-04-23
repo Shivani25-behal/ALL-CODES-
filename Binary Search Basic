@@ -1,31 +1,40 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 int main(){
     int n;
-    printf("Enter array Size: ");
-    int arr[n];
-    printf("Enter Array Elements: ");
+    scanf("%d",&n);
+    int arr[10000];
     for(int i=0; i<n ; i++){
         scanf("%d", &arr[i]);
     }
     int val;
-    printf("Enter Searching ElementP: ");
     scanf("%d" , &val);
     int startIdx = 0;
     int endIdx = n-1;
     while(startIdx <= endIdx){
         int mid = startIdx + (endIdx - startIdx)/2;
         if(val == arr[mid]){
-            printf("Found!!!\n");
-            return mid;
+            printf("%d found in array\n",val);
+            return 0;
         }
         else if(val < arr[mid])
         endIdx = mid-1;
         else
         startIdx = mid + 1;
+        
     }
-    printf("Not Found !!!!\n");
+    printf("%d not found in array\n",val);
     return 0;
 }
+        
+    
+
+ 
+    
         
     
 
