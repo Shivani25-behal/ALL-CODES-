@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+#define SIZE 100
+
+int tree[SIZE];
+int n = 0;
+
+void insert(int val) {
+    if (n == SIZE) {
+        printf("Overflow\n");
+        return;
+    }
+    tree[n++] = val;
+}
+
+int search(int val) {
+    for (int i = 0; i < n; i++) {
+        if (tree[i] == val)
+            return i;
+    }
+    return -1;
+}
+
+void deleteVal(int val) {
+    int i = search(val);
+    if (i == -1) {
+        printf("Not found\n");
+        return;
+    }
+    tree[i] = tree[n - 1];
+    n--;
+}
+
+void display() {
+    for (int i = 0; i < n; i++)
+        printf("%d ", tree[i]);
+    printf("\n");
+}
+
+int main() {
+    int choice, val;
+    while (1) {
+        printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\n");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                scanf("%d", &val);
+                insert(val);
+                break;
+            case 2:
+                scanf("%d", &val);
+                deleteVal(val);
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                return 0;
+        }
+    }
+}
